@@ -73,6 +73,8 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   // Save cart to localStorage whenever it changes
+  // Whenever cart items change, saves them to localStorage.
+
   useEffect(() => {
     localStorage.setItem('pharmastore-cart', JSON.stringify(state.items));
   }, [state.items]);
