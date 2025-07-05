@@ -1,11 +1,9 @@
 import React from 'react';
-import { ShoppingCart, AlertCircle, Lock } from 'lucide-react';
+import { ShoppingCart, AlertCircle } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
-import { useAuth } from '../../context/AuthContext';
 
 const MedicineCard = ({ medicine }) => {
   const { addToCart } = useCart();
-  const { user } = useAuth();
 
   const handleAddToCart = () => {
     addToCart(medicine);
@@ -62,23 +60,12 @@ const MedicineCard = ({ medicine }) => {
             disabled={!medicine.inStock}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${
               medicine.inStock
-                ? user 
-                  ? 'bg-purple-600 text-white hover:bg-purple-700'
-                  : 'bg-gray-400 text-white cursor-not-allowed'
+                ? 'bg-purple-600 text-white hover:bg-purple-700'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
           >
-            {!user ? (
-              <>
-                <Lock className="h-4 w-4" />
-                <span>Login Required</span>
-              </>
-            ) : (
-              <>
-                <ShoppingCart className="h-4 w-4" />
-                <span>Add to Cart</span>
-              </>
-            )}
+            <ShoppingCart className="h-4 w-4" />
+            <span>Add to Cart</span>
           </button>
         </div>
       </div>

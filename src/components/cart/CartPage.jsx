@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingBag, ArrowLeft, Lock } from 'lucide-react';
+import { ShoppingBag, ArrowLeft } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import CartItem from './CartItem';
@@ -8,35 +8,6 @@ import CartItem from './CartItem';
 const CartPage = () => {
   const { items, getCartTotal, getCartCount } = useCart();
   const { user } = useAuth();
-
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-gray-50 py-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <Lock className="h-24 w-24 text-gray-400 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Login Required</h2>
-            <p className="text-gray-600 mb-8">Please login to view your cart</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/login"
-                className="inline-flex items-center space-x-2 bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors"
-              >
-                <span>Login</span>
-              </Link>
-              <Link
-                to="/"
-                className="inline-flex items-center space-x-2 bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors"
-              >
-                <ArrowLeft className="h-5 w-5" />
-                <span>Continue Shopping</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   if (items.length === 0) {
     return (
@@ -110,12 +81,32 @@ const CartPage = () => {
               </div>
             </div>
 
-            <Link
-              to="/checkout"
-              className="w-full bg-purple-600 text-white py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors text-center block"
-            >
-              Proceed to Checkout
-            </Link>
+            {user ? (
+              <Link
+                to="/checkout"
+                className="w-full bg-purple-600 text-white py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors text-center block"
+              >
+                Proceed to Checkout
+              </Link>
+            ) : (
+              <div className="space-y-3">
+                <p className="text-sm text-gray-600 text-center">Login required to checkout</p>
+                <div className="flex flex-col space-y-2">
+                  <Link
+                    to="/login"
+                    className="w-full bg-purple-600 text-white py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors text-center block"
+                  >
+                    Login to Checkout
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors text-center block"
+                  >
+                    Create Account
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

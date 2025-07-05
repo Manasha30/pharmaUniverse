@@ -63,34 +63,29 @@ export const CartProvider = ({ children }) => {
   });
   const { user } = useAuth();
 
-  // Load cart from localStorage when user changes
+  // Load cart from localStorage when component mounts or user changes
   useEffect(() => {
-    if (user) {
-      const cartKey = `pharmastore-cart-${user.id}`;
-      const savedCart = localStorage.getItem(cartKey);
-      if (savedCart) {
-        try {
-          const parsedCart = JSON.parse(savedCart);
-          if (Array.isArray(parsedCart)) {
-            dispatch({ type: 'LOAD_CART', payload: parsedCart });
-          }
-        } catch (error) {
-          console.error('Error loading cart from localStorage:', error);
-          dispatch({ type: 'LOAD_CART', payload: [] });
+    const cartKey = user ? `pharmastore-cart-${user.id}` : 'pharmastore-cart-guest';
+    const savedCart = localStorage.getItem(cartKey);
+    if (savedCart) {
+      try {
+        const parsedCart = JSON.parse(savedCart);
+        if (Array.isArray(parsedCart)) {
+          dispatch({ type: 'LOAD_CART', payload: parsedCart });
         }
-      } else {
+      } catch (error) {
+        console.error('Error loading cart from localStorage:', error);
         dispatch({ type: 'LOAD_CART', payload: [] });
       }
     } else {
-      // Clear cart when user logs out
-      dispatch({ type: 'CLEAR_CART' });
+      dispatch({ type: 'LOAD_CART', payload: [] });
     }
   }, [user]);
 
-  // Save cart to localStorage whenever it changes (only if user is logged in)
+  // Save cart to localStorage whenever it changes
   useEffect(() => {
-    if (user && state.items) {
-      const cartKey = `pharmastore-cart-${user.id}`;
+    if (state.items) {
+      const cartKey = user ? `pharmastore-cart-${user.id}` : 'pharmastore-cart-guest';
       try {
         localStorage.setItem(cartKey, JSON.stringify(state.items));
       } catch (error) {
@@ -100,11 +95,6 @@ export const CartProvider = ({ children }) => {
   }, [state.items, user]);
 
   const addToCart = (item) => {
-    if (!user) {
-      toast.error('Please login to add items to cart');
-      return;
-    }
-
     const existingItem = state.items.find(cartItem => cartItem.id === item.id);
     if (existingItem) {
       toast.info('Item quantity updated in cart');
@@ -115,19 +105,11 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (id) => {
-    if (!user) {
-      toast.error('Please login to manage cart');
-      return;
-    }
     toast.success('Item removed from cart');
     dispatch({ type: 'REMOVE_FROM_CART', payload: id });
   };
 
   const updateQuantity = (id, quantity) => {
-    if (!user) {
-      toast.error('Please login to manage cart');
-      return;
-    }
     if (quantity <= 0) {
       removeFromCart(id);
     } else {
@@ -137,10 +119,8 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     dispatch({ type: 'CLEAR_CART' });
-    if (user) {
-      const cartKey = `pharmastore-cart-${user.id}`;
-      localStorage.removeItem(cartKey);
-    }
+    const cartKey = user ? `pharmastore-cart-${user.id}` : 'pharmastore-cart-guest';
+    localStorage.removeItem(cartKey);
   };
 
   const getCartTotal = () => {
