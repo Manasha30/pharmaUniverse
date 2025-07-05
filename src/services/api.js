@@ -67,7 +67,7 @@ const mockMedicines = [
     category: "Allergy",
     description:
       "Antihistamine for allergy relief including hay fever, hives, and skin allergies",
-    image: "https://www.xalmeds.com/cdn/shop/files/IMG_0344.jpg?v=1737265283",
+    image: "https://www.xalmeds.com/cdn/shop/files/IMG_0344.jpg",
     inStock: true,
     prescription: false,
   },
@@ -101,7 +101,7 @@ const mockMedicines = [
     description:
       "Non-drowsy antihistamine for seasonal allergies and allergic rhinitis",
     image:
-      "https://images.apollo247.in/pub/media/catalog/product/l/o/lor0635_3.jpg?auto=compress&cs=tinysrgb&w=300",
+      "https://images.apollo247.in/pub/media/catalog/product/l/o/lor0635_3.jpg",
     inStock: false,
     prescription: false,
   },
@@ -113,7 +113,7 @@ const mockMedicines = [
     description:
       "Cholesterol-lowering medication to reduce risk of heart disease",
     image:
-      "https://images.apollo247.in/pub/media/catalog/product/S/I/SIM0015_1_1.jpg?tr=w-264,q-80,f-webp,dpr-2,c-at_max",
+      "https://images.apollo247.in/pub/media/catalog/product/S/I/SIM0015_1_1.jpg",
     inStock: true,
     prescription: true,
   },
