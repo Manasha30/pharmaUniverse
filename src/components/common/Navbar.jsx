@@ -55,7 +55,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <img src={magnesiumGif} alt="logo" className="h-8 w-8" />
-            <span className="text-xl font-bold text-gray-900">PharmaStore</span>
+            <span className="text-xl font-bold text-grey-900">PharmaUniverse</span>
           </Link>
 
           {/* Desktop Navigation */}
