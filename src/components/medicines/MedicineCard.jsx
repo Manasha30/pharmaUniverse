@@ -1,9 +1,11 @@
 import React from 'react';
-import { ShoppingCart, AlertCircle } from 'lucide-react';
+import { ShoppingCart, AlertCircle, Lock } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
 
 const MedicineCard = ({ medicine }) => {
   const { addToCart } = useCart();
+  const { user } = useAuth();
 
   const handleAddToCart = () => {
     addToCart(medicine);
@@ -29,10 +31,10 @@ const MedicineCard = ({ medicine }) => {
       
       <div className="p-6">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+          <h3 className="text-lg font-semibold text-gray-900 group-hover:text-purple-600 transition-colors">
             {medicine.name}
           </h3>
-          <span className="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+          <span className="text-sm bg-purple-100 text-purple-800 px-2 py-1 rounded-full">
             {medicine.category}
           </span>
         </div>
@@ -43,8 +45,8 @@ const MedicineCard = ({ medicine }) => {
         
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-blue-600">
-              ${medicine.price}
+            <span className="text-2xl font-bold text-purple-600">
+              ₹{medicine.price}
             </span>
             <span className={`text-xs px-2 py-1 rounded-full ${
               medicine.inStock
@@ -60,12 +62,23 @@ const MedicineCard = ({ medicine }) => {
             disabled={!medicine.inStock}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${
               medicine.inStock
-                ? 'bg-blue-600 text-white hover:bg-blue-700'
+                ? user 
+                  ? 'bg-purple-600 text-white hover:bg-purple-700'
+                  : 'bg-gray-400 text-white cursor-not-allowed'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'
             }`}
           >
-            <ShoppingCart className="h-4 w-4" />
-            <span>Add to Cart</span>
+            {!user ? (
+              <>
+                <Lock className="h-4 w-4" />
+                <span>Login Required</span>
+              </>
+            ) : (
+              <>
+                <ShoppingCart className="h-4 w-4" />
+                <span>Add to Cart</span>
+              </>
+            )}
           </button>
         </div>
       </div>

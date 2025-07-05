@@ -65,7 +65,7 @@ const MedicineList = () => {
             <button
               key={category}
               onClick={() => handleSearch(category)}
-              className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-blue-100 hover:text-blue-700 transition-colors"
+              className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-purple-100 hover:text-purple-700 transition-colors"
             >
               {category}
             </button>
@@ -85,7 +85,7 @@ const MedicineList = () => {
             {searchQuery && (
               <button
                 onClick={() => handleSearch('')}
-                className="mt-4 text-blue-600 hover:text-blue-800 font-medium"
+                className="mt-4 text-purple-600 hover:text-purple-800 font-medium"
               >
                 Clear search
               </button>

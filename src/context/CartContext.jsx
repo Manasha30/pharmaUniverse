@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { useAuth } from './AuthContext';
 
 const CartContext = createContext();
 
@@ -8,7 +9,6 @@ const cartReducer = (state, action) => {
     case 'ADD_TO_CART':
       const existingItem = state.items.find(item => item.id === action.payload.id);
       if (existingItem) {
-        toast.info('Item quantity updated in cart');
         return {
           ...state,
           items: state.items.map(item =>
@@ -18,7 +18,6 @@ const cartReducer = (state, action) => {
           )
         };
       } else {
-        toast.success('Item added to cart');
         return {
           ...state,
           items: [...state.items, { ...action.payload, quantity: 1 }]
@@ -26,7 +25,6 @@ const cartReducer = (state, action) => {
       }
     
     case 'REMOVE_FROM_CART':
-      toast.success('Item removed from cart');
       return {
         ...state,
         items: state.items.filter(item => item.id !== action.payload)
@@ -51,7 +49,7 @@ const cartReducer = (state, action) => {
     case 'LOAD_CART':
       return {
         ...state,
-        items: action.payload
+        items: action.payload || []
       };
     
     default:
@@ -63,29 +61,73 @@ export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, {
     items: []
   });
+  const { user } = useAuth();
 
-  // Load cart from localStorage on mount
+  // Load cart from localStorage when user changes
   useEffect(() => {
-    const savedCart = localStorage.getItem('pharmastore-cart');
-    if (savedCart) {
-      dispatch({ type: 'LOAD_CART', payload: JSON.parse(savedCart) });
+    if (user) {
+      const cartKey = `pharmastore-cart-${user.id}`;
+      const savedCart = localStorage.getItem(cartKey);
+      if (savedCart) {
+        try {
+          const parsedCart = JSON.parse(savedCart);
+          if (Array.isArray(parsedCart)) {
+            dispatch({ type: 'LOAD_CART', payload: parsedCart });
+          }
+        } catch (error) {
+          console.error('Error loading cart from localStorage:', error);
+          dispatch({ type: 'LOAD_CART', payload: [] });
+        }
+      } else {
+        dispatch({ type: 'LOAD_CART', payload: [] });
+      }
+    } else {
+      // Clear cart when user logs out
+      dispatch({ type: 'CLEAR_CART' });
     }
-  }, []);
+  }, [user]);
 
-  // Save cart to localStorage whenever it changes
+  // Save cart to localStorage whenever it changes (only if user is logged in)
   useEffect(() => {
-    localStorage.setItem('pharmastore-cart', JSON.stringify(state.items));
-  }, [state.items]);
+    if (user && state.items) {
+      const cartKey = `pharmastore-cart-${user.id}`;
+      try {
+        localStorage.setItem(cartKey, JSON.stringify(state.items));
+      } catch (error) {
+        console.error('Error saving cart to localStorage:', error);
+      }
+    }
+  }, [state.items, user]);
 
   const addToCart = (item) => {
+    if (!user) {
+      toast.error('Please login to add items to cart');
+      return;
+    }
+
+    const existingItem = state.items.find(cartItem => cartItem.id === item.id);
+    if (existingItem) {
+      toast.info('Item quantity updated in cart');
+    } else {
+      toast.success('Item added to cart');
+    }
     dispatch({ type: 'ADD_TO_CART', payload: item });
   };
 
   const removeFromCart = (id) => {
+    if (!user) {
+      toast.error('Please login to manage cart');
+      return;
+    }
+    toast.success('Item removed from cart');
     dispatch({ type: 'REMOVE_FROM_CART', payload: id });
   };
 
   const updateQuantity = (id, quantity) => {
+    if (!user) {
+      toast.error('Please login to manage cart');
+      return;
+    }
     if (quantity <= 0) {
       removeFromCart(id);
     } else {
@@ -95,6 +137,10 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     dispatch({ type: 'CLEAR_CART' });
+    if (user) {
+      const cartKey = `pharmastore-cart-${user.id}`;
+      localStorage.removeItem(cartKey);
+    }
   };
 
   const getCartTotal = () => {

@@ -24,7 +24,7 @@ const CartItem = ({ item }) => {
       <div className="flex-1">
         <h3 className="font-medium text-gray-900">{item.name}</h3>
         <p className="text-sm text-gray-500">{item.category}</p>
-        <p className="text-lg font-semibold text-blue-600">${item.price}</p>
+        <p className="text-lg font-semibold text-purple-600">₹{item.price}</p>
       </div>
       
       <div className="flex items-center space-x-2">
@@ -47,7 +47,7 @@ const CartItem = ({ item }) => {
       
       <div className="text-right">
         <p className="font-semibold text-gray-900">
-          ${(item.price * item.quantity).toFixed(2)}
+          ₹{(item.price * item.quantity).toFixed(2)}
         </p>
         <button
           onClick={handleRemove}

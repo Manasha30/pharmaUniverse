@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, CreditCard, MapPin, User } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowLeft, CreditCard, MapPin, User, Lock } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
 
 const CheckoutPage = () => {
   const { items, getCartTotal, clearCart } = useCart();
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -42,9 +45,38 @@ const CheckoutPage = () => {
     setTimeout(() => {
       toast.success('Order placed successfully!');
       clearCart();
-      // In a real app, you would redirect to an order confirmation page
+      navigate('/');
     }, 1000);
   };
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gray-50 py-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <Lock className="h-24 w-24 text-gray-400 mx-auto mb-4" />
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Login Required</h2>
+            <p className="text-gray-600 mb-8">Please login to proceed with checkout</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/login"
+                className="inline-flex items-center space-x-2 bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors"
+              >
+                <span>Login</span>
+              </Link>
+              <Link
+                to="/"
+                className="inline-flex items-center space-x-2 bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors"
+              >
+                <ArrowLeft className="h-5 w-5" />
+                <span>Continue Shopping</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (
@@ -55,7 +87,7 @@ const CheckoutPage = () => {
             <p className="text-gray-600 mb-8">Your cart is empty</p>
             <Link
               to="/"
-              className="inline-flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center space-x-2 bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors"
             >
               <ArrowLeft className="h-5 w-5" />
               <span>Continue Shopping</span>
@@ -72,7 +104,7 @@ const CheckoutPage = () => {
         <div className="flex items-center space-x-4 mb-8">
           <Link
             to="/cart"
-            className="text-blue-600 hover:text-blue-800 transition-colors"
+            className="text-purple-600 hover:text-purple-800 transition-colors"
           >
             <ArrowLeft className="h-6 w-6" />
           </Link>
@@ -85,7 +117,7 @@ const CheckoutPage = () => {
             {/* Personal Information */}
             <div className="bg-white rounded-xl shadow-md p-6">
               <div className="flex items-center space-x-2 mb-4">
-                <User className="h-5 w-5 text-blue-600" />
+                <User className="h-5 w-5 text-purple-600" />
                 <h2 className="text-xl font-bold text-gray-900">Personal Information</h2>
               </div>
               
@@ -99,7 +131,7 @@ const CheckoutPage = () => {
                     name="firstName"
                     value={formData.firstName}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -113,7 +145,7 @@ const CheckoutPage = () => {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -127,7 +159,7 @@ const CheckoutPage = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -141,7 +173,7 @@ const CheckoutPage = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -151,7 +183,7 @@ const CheckoutPage = () => {
             {/* Shipping Address */}
             <div className="bg-white rounded-xl shadow-md p-6">
               <div className="flex items-center space-x-2 mb-4">
-                <MapPin className="h-5 w-5 text-blue-600" />
+                <MapPin className="h-5 w-5 text-purple-600" />
                 <h2 className="text-xl font-bold text-gray-900">Shipping Address</h2>
               </div>
               
@@ -165,7 +197,7 @@ const CheckoutPage = () => {
                     name="address"
                     value={formData.address}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -180,7 +212,7 @@ const CheckoutPage = () => {
                       name="city"
                       value={formData.city}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                       required
                     />
                   </div>
@@ -194,7 +226,7 @@ const CheckoutPage = () => {
                       name="zipCode"
                       value={formData.zipCode}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                       required
                     />
                   </div>
@@ -205,7 +237,7 @@ const CheckoutPage = () => {
             {/* Payment Information */}
             <div className="bg-white rounded-xl shadow-md p-6">
               <div className="flex items-center space-x-2 mb-4">
-                <CreditCard className="h-5 w-5 text-blue-600" />
+                <CreditCard className="h-5 w-5 text-purple-600" />
                 <h2 className="text-xl font-bold text-gray-900">Payment Information</h2>
               </div>
               
@@ -220,7 +252,7 @@ const CheckoutPage = () => {
                     value={formData.cardNumber}
                     onChange={handleInputChange}
                     placeholder="1234 5678 9012 3456"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   />
                 </div>
                 
@@ -235,7 +267,7 @@ const CheckoutPage = () => {
                       value={formData.expiryDate}
                       onChange={handleInputChange}
                       placeholder="MM/YY"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     />
                   </div>
                   
@@ -249,7 +281,7 @@ const CheckoutPage = () => {
                       value={formData.cvv}
                       onChange={handleInputChange}
                       placeholder="123"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -268,7 +300,7 @@ const CheckoutPage = () => {
                     <p className="font-medium text-gray-900">{item.name}</p>
                     <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
                   </div>
-                  <p className="font-medium">${(item.price * item.quantity).toFixed(2)}</p>
+                  <p className="font-medium">₹{(item.price * item.quantity).toFixed(2)}</p>
                 </div>
               ))}
             </div>
@@ -276,21 +308,21 @@ const CheckoutPage = () => {
             <div className="border-t pt-4 space-y-3">
               <div className="flex justify-between">
                 <span className="text-gray-600">Subtotal</span>
-                <span className="font-medium">${getCartTotal().toFixed(2)}</span>
+                <span className="font-medium">₹{getCartTotal().toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Shipping</span>
-                <span className="font-medium">$5.00</span>
+                <span className="font-medium">₹50.00</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Tax</span>
-                <span className="font-medium">${(getCartTotal() * 0.1).toFixed(2)}</span>
+                <span className="font-medium">₹{(getCartTotal() * 0.1).toFixed(2)}</span>
               </div>
               <div className="border-t pt-3">
                 <div className="flex justify-between">
                   <span className="text-lg font-bold text-gray-900">Total</span>
-                  <span className="text-lg font-bold text-blue-600">
-                    ${(getCartTotal() + 5 + (getCartTotal() * 0.1)).toFixed(2)}
+                  <span className="text-lg font-bold text-purple-600">
+                    ₹{(getCartTotal() + 50 + (getCartTotal() * 0.1)).toFixed(2)}
                   </span>
                 </div>
               </div>

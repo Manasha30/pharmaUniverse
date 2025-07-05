@@ -44,7 +44,7 @@ const DoctorCard = ({ doctor }) => {
         <div className="space-y-3 mb-4">
           <div className="flex items-center space-x-2 text-sm text-gray-600">
             <DollarSign className="h-4 w-4" />
-            <span>Consultation Fee: ${doctor.fee}</span>
+            <span>Consultation Fee: ₹{doctor.fee}</span>
           </div>
           
           <div className="flex items-center space-x-2 text-sm text-gray-600">
