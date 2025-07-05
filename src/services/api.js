@@ -3,7 +3,8 @@ const mockMedicines = [
   {
     id: "1",
     name: "Paracetamol 500mg",
-    price: 25.99,
+    price: 13.50,
+    count : 15,
     category: "Pain Relief",
     description:
       "Effective pain relief and fever reducer for headaches, muscle pain, and cold symptoms",
@@ -15,7 +16,8 @@ const mockMedicines = [
   {
     id: "2",
     name: "Amoxicillin 250mg",
-    price: 45.5,
+    price: 19.20,
+    count : 10,
     category: "Antibiotics",
     description:
       "Broad-spectrum antibiotic for bacterial infections including respiratory tract infections",
@@ -27,7 +29,8 @@ const mockMedicines = [
   {
     id: "3",
     name: "Vitamin D3 60,000 IU",
-    price: 239,
+    price: 90,
+    count: 4,
     category: "Vitamins",
     description:
       "Essential vitamin for bone health, immune system support, and calcium absorption",
@@ -39,7 +42,8 @@ const mockMedicines = [
   {
     id: "4",
     name: "Ibuprofen 200mg",
-    price: 18.99,
+    price: 10.80,
+    count: 10,
     category: "Pain Relief",
     description:
       "Anti-inflammatory pain reliever for arthritis, muscle pain, and inflammation",
@@ -51,7 +55,8 @@ const mockMedicines = [
   {
     id: "5",
     name: "Omeprazole 20mg",
-    price: 28.5,
+    price: 64,
+    count : 20,
     category: "Digestive Health",
     description:
       "Proton pump inhibitor for acid reflux, heartburn, and stomach ulcer treatment",
@@ -63,7 +68,8 @@ const mockMedicines = [
   {
     id: "6",
     name: "Cetirizine 10mg",
-    price: 22.25,
+    price: 28.35,
+    count:15,
     category: "Allergy",
     description:
       "Antihistamine for allergy relief including hay fever, hives, and skin allergies",
@@ -74,7 +80,8 @@ const mockMedicines = [
   {
     id: "7",
     name: "Metformin 500mg",
-    price: 35.8,
+    price: 19.30,
+    count: 20,
     category: "Diabetes",
     description: "Type 2 diabetes medication to control blood sugar levels",
     image:
@@ -85,7 +92,8 @@ const mockMedicines = [
   {
     id: "8",
     name: "Aspirin 75mg",
-    price: 15.99,
+    price: 3.33,
+    count:14,
     category: "Cardiovascular",
     description: "Low-dose aspirin for heart attack and stroke prevention",
     image:
@@ -96,7 +104,8 @@ const mockMedicines = [
   {
     id: "9",
     name: "Loratadine 10mg",
-    price: 19.75,
+    price: 103.50,
+    count:10,
     category: "Allergy",
     description:
       "Non-drowsy antihistamine for seasonal allergies and allergic rhinitis",
@@ -108,7 +117,8 @@ const mockMedicines = [
   {
     id: "10",
     name: "Simvastatin 20mg",
-    price: 42.3,
+    price: 279.90,
+    count:10,
     category: "Cardiovascular",
     description:
       "Cholesterol-lowering medication to reduce risk of heart disease",
@@ -120,7 +130,8 @@ const mockMedicines = [
   {
     id: "11",
     name: "Multivitamin Complex",
-    price: 29.99,
+    price: 135,
+    count:10,
     category: "Vitamins",
     description:
       "Complete daily multivitamin with essential vitamins and minerals",
@@ -132,7 +143,7 @@ const mockMedicines = [
   {
     id: "12",
     name: "Dextromethorphan Syrup",
-    price: 16.5,
+    price: 130.50,
     category: "Cough & Cold",
     description: "Cough suppressant syrup for dry, persistent cough relief",
     image:
@@ -143,7 +154,8 @@ const mockMedicines = [
   {
     id: "13",
     name: "Thyroxine 100mcg",
-    price: 100,
+    price: 144,
+    count: 100,
     category: "Thyroid",
     description: "Thyroid hormone replacement therapy",
     image:
