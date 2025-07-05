@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ShoppingCart, Menu, X, Pill, Stethoscope, Home, User, LogOut } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
+import magnesiumGif from '../../assets/magnesium.gif';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,7 +54,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <Pill className="h-8 w-8 text-purple-600" />
+            <img src={magnesiumGif} alt="logo" className="h-8 w-8" />
             <span className="text-xl font-bold text-gray-900">PharmaStore</span>
           </Link>
 
