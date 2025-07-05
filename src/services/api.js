@@ -1,125 +1,155 @@
 // Mock data for development
 const mockMedicines = [
   {
-    id: '1',
-    name: 'Paracetamol 500mg',
+    id: "1",
+    name: "Paracetamol 500mg",
     price: 25.99,
-    category: 'Pain Relief',
-    description: 'Effective pain relief and fever reducer for headaches, muscle pain, and cold symptoms',
-    image: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=300',
+    category: "Pain Relief",
+    description:
+      "Effective pain relief and fever reducer for headaches, muscle pain, and cold symptoms",
+    image:
+      "https://static.meds.cvpharmacy.in/wp-content/uploads/2024/07/8014_5084ba5b-f240-4b03-970a-7363a0638016_5084ba5b-f240-4b03-970a-7363a0638016-1.jpg",
     inStock: true,
-    prescription: false
+    prescription: false,
   },
   {
-    id: '2',
-    name: 'Amoxicillin 250mg',
-    price: 45.50,
-    category: 'Antibiotics',
-    description: 'Broad-spectrum antibiotic for bacterial infections including respiratory tract infections',
-    image: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=300',
+    id: "2",
+    name: "Amoxicillin 250mg",
+    price: 45.5,
+    category: "Antibiotics",
+    description:
+      "Broad-spectrum antibiotic for bacterial infections including respiratory tract infections",
+    image:
+      "https://www.hlhealthcare.co.in/wp-content/uploads/2024/07/HELMOX-625-scaled.jpg",
     inStock: true,
-    prescription: true
+    prescription: true,
   },
   {
-    id: '3',
-    name: 'Vitamin D3 1000IU',
-    price: 32.75,
-    category: 'Vitamins',
-    description: 'Essential vitamin for bone health, immune system support, and calcium absorption',
-    image: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=300',
+    id: "3",
+    name: "Vitamin D3 60,000 IU",
+    price: 239,
+    category: "Vitamins",
+    description:
+      "Essential vitamin for bone health, immune system support, and calcium absorption",
+    image:
+      "https://m.media-amazon.com/images/I/41TmQxq6kTL._SX300_SY300_QL70_FMwebp_.jpg",
     inStock: true,
-    prescription: false
+    prescription: true,
   },
   {
-    id: '4',
-    name: 'Ibuprofen 200mg',
+    id: "4",
+    name: "Ibuprofen 200mg",
     price: 18.99,
-    category: 'Pain Relief',
-    description: 'Anti-inflammatory pain reliever for arthritis, muscle pain, and inflammation',
-    image: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=300',
+    category: "Pain Relief",
+    description:
+      "Anti-inflammatory pain reliever for arthritis, muscle pain, and inflammation",
+    image:
+      "https://www.ashcroftpharmacy.co.uk/uploads/images/products/large/ashcroft-pharmacy-ibuprofen-400mg-tablets-1740783905Ibuprofen-400mg-Tablets.png",
     inStock: true,
-    prescription: false
+    prescription: false,
   },
   {
-    id: '5',
-    name: 'Omeprazole 20mg',
-    price: 28.50,
-    category: 'Digestive Health',
-    description: 'Proton pump inhibitor for acid reflux, heartburn, and stomach ulcer treatment',
-    image: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=300',
+    id: "5",
+    name: "Omeprazole 20mg",
+    price: 28.5,
+    category: "Digestive Health",
+    description:
+      "Proton pump inhibitor for acid reflux, heartburn, and stomach ulcer treatment",
+    image:
+      "https://www.adegenpharma.com/wp-content/uploads/2023/02/OMILESS-20-CAPSULE.jpg",
     inStock: true,
-    prescription: true
+    prescription: true,
   },
   {
-    id: '6',
-    name: 'Cetirizine 10mg',
+    id: "6",
+    name: "Cetirizine 10mg",
     price: 22.25,
-    category: 'Allergy',
-    description: 'Antihistamine for allergy relief including hay fever, hives, and skin allergies',
-    image: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=300',
+    category: "Allergy",
+    description:
+      "Antihistamine for allergy relief including hay fever, hives, and skin allergies",
+    image: "https://www.xalmeds.com/cdn/shop/files/IMG_0344.jpg?v=1737265283",
     inStock: true,
-    prescription: false
+    prescription: false,
   },
   {
-    id: '7',
-    name: 'Metformin 500mg',
-    price: 35.80,
-    category: 'Diabetes',
-    description: 'Type 2 diabetes medication to control blood sugar levels',
-    image: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=300',
+    id: "7",
+    name: "Metformin 500mg",
+    price: 35.8,
+    category: "Diabetes",
+    description: "Type 2 diabetes medication to control blood sugar levels",
+    image:
+      "https://images.apollo247.in/pub/media/catalog/product/o/k/oka0007_3.jpg",
     inStock: true,
-    prescription: true
+    prescription: true,
   },
   {
-    id: '8',
-    name: 'Aspirin 75mg',
+    id: "8",
+    name: "Aspirin 75mg",
     price: 15.99,
-    category: 'Cardiovascular',
-    description: 'Low-dose aspirin for heart attack and stroke prevention',
-    image: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=300',
+    category: "Cardiovascular",
+    description: "Low-dose aspirin for heart attack and stroke prevention",
+    image:
+      "https://images.apollo247.in/pub/media/catalog/product/E/C/ECO0005_1_1.jpg",
     inStock: true,
-    prescription: false
+    prescription: false,
   },
   {
-    id: '9',
-    name: 'Loratadine 10mg',
+    id: "9",
+    name: "Loratadine 10mg",
     price: 19.75,
-    category: 'Allergy',
-    description: 'Non-drowsy antihistamine for seasonal allergies and allergic rhinitis',
-    image: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=300',
+    category: "Allergy",
+    description:
+      "Non-drowsy antihistamine for seasonal allergies and allergic rhinitis",
+    image:
+      "https://images.apollo247.in/pub/media/catalog/product/l/o/lor0635_3.jpg?auto=compress&cs=tinysrgb&w=300",
     inStock: false,
-    prescription: false
+    prescription: false,
   },
   {
-    id: '10',
-    name: 'Simvastatin 20mg',
-    price: 42.30,
-    category: 'Cardiovascular',
-    description: 'Cholesterol-lowering medication to reduce risk of heart disease',
-    image: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=300',
+    id: "10",
+    name: "Simvastatin 20mg",
+    price: 42.3,
+    category: "Cardiovascular",
+    description:
+      "Cholesterol-lowering medication to reduce risk of heart disease",
+    image:
+      "https://images.apollo247.in/pub/media/catalog/product/S/I/SIM0015_1_1.jpg?tr=w-264,q-80,f-webp,dpr-2,c-at_max",
     inStock: true,
+    prescription: true,
+  },
+  {
+    id: "11",
+    name: "Multivitamin Complex",
+    price: 29.99,
+    category: "Vitamins",
+    description:
+      "Complete daily multivitamin with essential vitamins and minerals",
+    image:
+      "https://images.apollo247.in/pub/media/catalog/product/W/B/WBN0008_1-AUG23_1.jpg",
+    inStock: true,
+    prescription: false,
+  },
+  {
+    id: "12",
+    name: "Dextromethorphan Syrup",
+    price: 16.5,
+    category: "Cough & Cold",
+    description: "Cough suppressant syrup for dry, persistent cough relief",
+    image:
+      "https://5.imimg.com/data5/SELLER/Default/2023/9/348409940/DJ/VG/SC/557330/dextromethorphan-cough-syrup-1000x1000.jpg",
+    inStock: true,
+    prescription: false,
+  },
+  {
+    id: "13",
+    name: "Thyroxine 100mcg",
+    price: 100,
+    category: "Thyroid",
+    description: "Thyroid hormone replacement therapy",
+    image:
+      "https://images.apollo247.in/pub/media/catalog/product/T/H/THY0007_1_1.jpg",
     prescription: true
   },
-  {
-    id: '11',
-    name: 'Multivitamin Complex',
-    price: 29.99,
-    category: 'Vitamins',
-    description: 'Complete daily multivitamin with essential vitamins and minerals',
-    image: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=300',
-    inStock: true,
-    prescription: false
-  },
-  {
-    id: '12',
-    name: 'Dextromethorphan Syrup',
-    price: 16.50,
-    category: 'Cough & Cold',
-    description: 'Cough suppressant syrup for dry, persistent cough relief',
-    image: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=300',
-    inStock: true,
-    prescription: false
-  }
 ];
 
 const mockDoctors = [

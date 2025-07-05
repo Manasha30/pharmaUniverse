@@ -15,7 +15,7 @@ const MedicineCard = ({ medicine }) => {
         <img
           src={medicine.image}
           alt={medicine.name}
-          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-56 object-contain bg-white p-4 group-hover:scale-105 transition-transform duration-300"
         />
         <div className="absolute top-3 right-3">
           {medicine.prescription && (
