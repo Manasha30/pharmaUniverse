@@ -1,9 +1,17 @@
 import React from 'react';
-import { Calendar, Star, Clock, DollarSign } from 'lucide-react';
+import { Calendar, Star, Clock, DollarSign, Lock } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useAuth } from '../../context/AuthContext';
 
 const DoctorCard = ({ doctor }) => {
+  const { user } = useAuth();
+
   const handleBookConsultation = () => {
+    if (!user) {
+      toast.error('Please login to book a consultation');
+      return;
+    }
     toast.success(`Consultation booked with ${doctor.name}!`);
   };
 
@@ -62,18 +70,30 @@ const DoctorCard = ({ doctor }) => {
             {doctor.available ? 'Available' : 'Unavailable'}
           </span>
           
-          <button
-            onClick={handleBookConsultation}
-            disabled={!doctor.available}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${
-              doctor.available
-                ? 'bg-teal-600 text-white hover:bg-teal-700'
-                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            }`}
-          >
-            <Calendar className="h-4 w-4" />
-            <span>Book Consultation</span>
-          </button>
+          {user ? (
+            <button
+              onClick={handleBookConsultation}
+              disabled={!doctor.available}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${
+                doctor.available
+                  ? 'bg-teal-600 text-white hover:bg-teal-700'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              }`}
+            >
+              <Calendar className="h-4 w-4" />
+              <span>Book Consultation</span>
+            </button>
+          ) : (
+            <div className="flex flex-col space-y-2">
+              <Link
+                to="/login"
+                className="flex items-center space-x-2 px-4 py-2 rounded-lg font-medium bg-teal-600 text-white hover:bg-teal-700 transition-colors text-center"
+              >
+                <Lock className="h-4 w-4" />
+                <span>Login to Book</span>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>
